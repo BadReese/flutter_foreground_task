@@ -37,7 +37,7 @@ class ForegroundServiceManager {
 		return true
 	}
 
-	fun startOnly(context: Context, call: MethodCall): Boolean {
+	fun startOnly(context: Context): Boolean {
 		try {
 			val intent = Intent(context, ForegroundService::class.java)
 			saveServiceAction(context, ForegroundServiceAction.START)
