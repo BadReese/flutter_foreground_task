@@ -39,6 +39,11 @@ class ForegroundServiceManager {
 
 	fun startOnly(context: Context): Boolean {
 		try {
+			val prefs = context.getSharedPreferences(
+				ForegroundServicePrefsKey.PREFS_NAME, Context.MODE_PRIVATE) ?: return false
+			if (prefs.getString(ForegroundServicePrefsKey.NOTIFICATION_CHANNEL_ID, null).isNullOrEmpty()) {
+				return false
+			}
 			val intent = Intent(context, ForegroundService::class.java)
 			saveServiceAction(context, ForegroundServiceAction.START)
 
