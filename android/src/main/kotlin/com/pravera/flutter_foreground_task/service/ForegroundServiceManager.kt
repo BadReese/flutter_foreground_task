@@ -20,11 +20,13 @@ class ForegroundServiceManager {
 	 * @param context context
 	 * @param call Method call on the method channel. This includes notification options.
 	 */
-	fun start(context: Context, call: MethodCall): Boolean {
+	fun start(context: Context, call: MethodCall?): Boolean {
 		try {
 			val intent = Intent(context, ForegroundService::class.java)
 			saveServiceAction(context, ForegroundServiceAction.START)
-			saveOptions(context, call)
+			if (call != null) {
+				saveOptions(context, call)
+			}
 
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
 				context.startForegroundService(intent)
